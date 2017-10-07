@@ -10,8 +10,4 @@ router.get('/stream', async function(req, res, next) {
     return res.status(200).send('hello');
 });
 
-// router.post('/summarize', fuction(req, res, next) {
-//
-// });
-
 module.exports = router;
