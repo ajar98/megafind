@@ -28,9 +28,3 @@ var hash = {};
 
 
 module.exports = sessions;
-
-l = new sessions();
-var v = l.createSession();
-
-console.log(l.joinSession(v));
-console.log(l.joinSession(v+1));
