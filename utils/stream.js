@@ -1,10 +1,14 @@
 const record = require('node-record-lpcm16');
 const Speech = require('@google-cloud/speech');
 const request = require('request');
+const to = require('to-case');
+const WordPOS = require('wordpos'), wordpos = new WordPOS();
 
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
 const languageCode = 'en-US';
+
+const interrogatives = ['what', 'when', 'why', 'which', 'who', 'how', 'whose', 'whom'];
 
 class Stream {
 
@@ -22,16 +26,28 @@ class Stream {
         .on('error', console.error)
         .on('data', (data) => {
             if (data.results[0] && data.results[0].alternatives[0]) {
-                const text = {text: data.results[0].alternatives[0].transcript};
-                console.log(`Text sent: ${JSON.stringify(text)}`);
-                request.post('https://adf030c8.ngrok.io/handleText', {form: text});
-            } else {
-                // Error
+                const rawText = data.results[0].alternatives[0].transcript;
+                this.processText(rawText, (cleaned) => {
+                    request.post('https://adf030c8.ngrok.io/handleText', {form: {text: cleaned}});
+                    console.log(`Text sent: ${JSON.stringify(cleaned)}`);
+                });
+
             }
         });
   }
 
+  processText(rawText, cb) {
+      const sent = to.sentence(rawText);
+      const first = sent.split(' ')[0];
+      if (interrogatives.includes(first.toLowerCase())) {
+          cb(`${sent}? `);
+      } else {
+          cb(`${sent}. `)
+      }
+  }
+
   startRecording() {
+      console.log('starting recording');
       // Start recording and send the microphone input to the Speech API
       record
         .start({
@@ -47,6 +63,7 @@ class Stream {
   };
 
   stopRecording() {
+    console.log('stopping recording');
     record.stop();
     return;
   }
