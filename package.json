@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ajar98/no_tebooks#readme",
   "dependencies": {
-    "express": "^4.16.1"
+    "express": "^4.16.1",
+    "google-cloud": "^0.57.0",
+    "node-record-lpcm16": "^0.3.0"
   }
 }

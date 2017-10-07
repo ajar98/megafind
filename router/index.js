@@ -1,17 +1,17 @@
-import { Router } from 'express'
+const Stream = require('../utils/stream');
+const express = require('express');
 
-// import other routers here:
-/* FILL IN */
-import createStreamingRouter from './streaming'
-import createSummarizerRouter from './summarizer'
+const router = express.Router();
 
-export default () => {
-  const router = Router()
 
-  // put endpoints here
-  /* FILL IN */
-  router.use('/stream', createStreamingRouter())
-  router.use('/summarize', createSummarizerRouter())
+router.get('/stream', async function(req, res, next) {
+    const stream = new Stream();
+    stream.startRecording();
+    return res.status(200).send('hello');
+});
 
-  return router
-}
+// router.post('/summarize', fuction(req, res, next) {
+//
+// });
+
+module.exports = router;
