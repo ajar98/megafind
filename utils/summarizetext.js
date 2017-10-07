@@ -1,3 +1,34 @@
+class Summarizer {
+  constructor() {
+    this.options = {
+      method: 'POST',
+      url: 'http://api.intellexer.com/summarizeText',
+      qs: {
+        apikey: '0d175b94-7204-45cd-9231-87178dbdb22f',
+        summaryRestriction: '2',
+        returnedTopicsCount: '2',
+        loadConceptsTree: 'false',
+        loadNamedEntityTree: 'false',
+        usePercentRestriction: 'false',
+        conceptsRestriction: '7',
+        structure: 'general',
+        fullTextTrees: 'false',
+        textStreamLength: '1000',
+        wrapConcepts: 'true' },
+      headers:{ 'cache-control': 'no-cache' }
+    }
+  }
+
+  summarizeText(text) {
+    this.options.body = text;
+
+    request.post('http://api.intellexer.com/summarizeText', {})
+
+  }
+}
+
+
+
 var newbod = null;
 var request = require("request");
 function summarizeText(txt){
