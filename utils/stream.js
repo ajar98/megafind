@@ -14,7 +14,7 @@ class Stream {
         config: {
           encoding,
           sampleRateHertz,
-          languageCode
+          languageCode,
         },
         interimResults: false // If you want interim results, set this to true
       };
