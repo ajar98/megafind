@@ -14,13 +14,10 @@ class sparkpost{
     sendMail(link){
 
     client.transmissions.send({
-        options: {
-        sandbox: true
-        },
         content: {
 
         from: this.address.toString(),
-        subject: 'Lecture for ' + course,
+        subject: 'Lecture for ' + this.course,
         html:'<html><body><p>Hello Class,</p><p>Here is the link to today\'s lecture <a href = "">'+ link+'</a> </p></body></html>'
            },
         recipients: [
@@ -28,12 +25,14 @@ class sparkpost{
         ]
     })
     .then(data => {
-        console.log('Woohoo! You just sent your first mailing!');
+        console.log('Your email has been sent');
         console.log(data);
     })
     .catch(err => {
-        console.log('Whoops! Something went wrong');
+        console.log('Something may be wrong, check your connection');
         console.log(err);
         });
     }
   }
+var s = new sparkpost("megafind@mega-find.com", "english");
+s.sendMail("10");
