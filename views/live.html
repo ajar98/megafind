@@ -11,29 +11,8 @@
     document.getElementById('messages').textContent += data.text;
   });
   </script>
-  <script>
-    $(function() {
-        $('#record').click(function(event) {
-            $.ajax({
-                type: 'POST',
-                url: 'http://adf030c8.ngrok.io/stream/start',
-            });
-        });
-    });
+  <p id='messages'></p>
 
-    $(function() {
-        $('#cease').click(function(event) {
-            $.ajax({
-                type: 'POST',
-                url: 'http://adf030c8.ngrok.io/stream/stop',
-            });
-        });
-    });
-  </script>
-  <ul id='messages'></ul>
-
-  <button id='record'>Start Lecture</button>
-  <button id='cease'>Stop Lecture</button>
 </body>
 
 </html>
