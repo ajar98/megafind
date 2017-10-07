@@ -5,7 +5,7 @@ class Entity {
       this.language = Language();
     }
 
-    /* DOCUMENT must look like THIS:
+    /* DOC must look like THIS:
       {
       'content' = text,
       type = 'PLAIN_TEXT'
