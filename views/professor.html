@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+  var socket = io();
+  socket.on('text', function (data) {
+    document.getElementById('messages').textContent += data.text;
+  });
+  </script>
+  <script>
+    $(function() {
+        $('#record').click(function(event) {
+            $.ajax({
+                type: 'POST',
+                url: 'http://adf030c8.ngrok.io/stream/start',
+            });
+        });
+    });
+
+    $(function() {
+        $('#cease').click(function(event) {
+            $.ajax({
+                type: 'POST',
+                url: 'http://adf030c8.ngrok.io/stream/stop',
+            });
+        });
+    });
+  </script>
+  <ul id='messages'></ul>
+
+  <button id='record'>Start Lecture</button>
+  <button id='cease'>Stop Lecture</button>
+</body>
+
+</html>

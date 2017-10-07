@@ -27,6 +27,11 @@ router.get('/live', async function(req, res, next) {
    return res.status(200).sendFile(path.resolve('views/live.html'));
 });
 
+
+router.get('/professor', async function(req, res, next) {
+   return res.status(200).sendFile(path.resolve('views/professor.html'));
+});
+
 router.post('/handleText', async function(req, res, next) {
   const text = req.body;
   console.log(`Text received at handleText: ${JSON.stringify(text)}`);
