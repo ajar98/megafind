@@ -18,8 +18,15 @@
   "homepage": "https://github.com/ajar98/no_tebooks#readme",
   "dependencies": {
     "express": "^4.16.1",
+    "express-winston": "^2.4.0",
     "google-cloud": "^0.57.0",
     "node-record-lpcm16": "^0.3.0",
-    "socket.io": "^2.0.3"
+    "socket.io": "^2.0.3",
+<<<<<<< HEAD
+    "to-case": "^2.0.0",
+    "wordpos": "^1.1.5"
+=======
+    "winston": "^2.4.0"
+>>>>>>> ae2b57d8cb5dc9855d026f65bbd3965ed63b7e0f
   }
 }
