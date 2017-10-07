@@ -1,18 +1,10 @@
 const record = require('node-record-lpcm16');
-
-// Imports the Google Cloud client library
 const Speech = require('@google-cloud/speech');
 
-// Instantiates a client
 const speech = Speech();
 
-// The encoding of the audio file, e.g. 'LINEAR16'
 const encoding = 'LINEAR16';
-
-// The sample rate of the audio file in hertz, e.g. 16000
 const sampleRateHertz = 16000;
-
-// The BCP-47 language code to use, e.g. 'en-US'
 const languageCode = 'en-US';
 
 const request = {
@@ -24,8 +16,10 @@ const request = {
   interimResults: false // If you want interim results, set this to true
 };
 
+const Stream = module.exports;
+
 // Create a recognize stream
-const recognizeStream = speech.streamingRecognize(request)
+Stream.recognizeStream = speech.streamingRecognize(request)
   .on('error', console.error)
   .on('data', (data) =>
       process.stdout.write(
@@ -33,7 +27,7 @@ const recognizeStream = speech.streamingRecognize(request)
           ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
           : `\n\nReached transcription time limit, press Ctrl+C\n`));
 
-const startRecording = function() {
+Stream.startRecording = () => {
     // Start recording and send the microphone input to the Speech API
     record
       .start({
@@ -45,10 +39,10 @@ const startRecording = function() {
         silence: '10.0'
       })
       .on('error', console.error)
-      .pipe(recognizeStream);
+      .pipe(Stream.recognizeStream);
 }
 
-startRecording()
+Stream.startRecording()
 
 
 
