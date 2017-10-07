@@ -8,8 +8,8 @@ const languageCode = 'en-US';
 class Stream {
 
   constructor() {
-      const speech = Speech();
-      const request = {
+      this.speech = Speech();
+      this.request = {
         config: {
           encoding,
           sampleRateHertz,
@@ -17,7 +17,7 @@ class Stream {
         },
         interimResults: false // If you want interim results, set this to true
       };
-      const recognizeStream = speech.streamingRecognize(request)
+      this.recognizeStream = this.speech.streamingRecognize(this.request)
         .on('error', console.error)
         .on('data', (data) =>
             process.stdout.write(
@@ -34,14 +34,14 @@ class Stream {
           threshold: 0,
           // Other options, see https://www.npmjs.com/package/node-record-lpcm16#options
           verbose: false,
-          recordProgram: 'arecord' // Try also "arecord" or "sox"
+          recordProgram: 'rec' // Try also "arecord" or "sox"
         })
         .on('error', console.error)
-        .pipe(recognizeStream);
+        .pipe(this.recognizeStream);
 
       setTimeout(function () {
         record.stop()
-      }, 3000);
+      }, 10000);
       return;
   };
 
