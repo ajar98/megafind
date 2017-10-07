@@ -1,30 +1,32 @@
 const lecture = require('./lecture');
 
 var hash = {};
-    class sessions{
-    constructor(){
+
+class Session {
+    constructor () {
     }
-    createSession(){
-        var numb = Math.floor(Math.random()*20);
-        console.log(numb);
+
+    createSession () {
+        let num = Math.floor(Math.random()*20);
+
         while((numb.toString() in hash)){
             numb = Math.floor(Math.random()*20);
         }
         hash[numb.toString()] = new lecture(numb);
         return numb;
-        }
+    }
 
 
-    joinSession(key){
-        var strrep = key.toString();
-        if(strrep in hash){
+    joinSession (key) {
+        const strKey = key.toString();
+
+        if (strKey in hash) {
             return hash[strrep];
-        }
-        else{
+        } else {
             return 'Error Invalid Entry Code.'
         }
     }
     }
 
 
-module.exports = sessions;
+module.exports = Session;
