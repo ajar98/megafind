@@ -1,6 +1,6 @@
 const express = require('express')
 const router = require('./router/index');
-
+const bodyParser = require('body-parser');
 const app = express();
 // import createRouter from './router'
 // import { createStreamingService, createSummarizerService } from './services'
@@ -19,7 +19,9 @@ const app = express();
 
 
 // every request goes through the router
-app.use('/', router)
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use('/', router);
 
 // router.init();
 

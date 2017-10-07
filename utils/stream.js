@@ -1,5 +1,6 @@
 const record = require('node-record-lpcm16');
 const Speech = require('@google-cloud/speech');
+const request = require('request');
 
 const encoding = 'LINEAR16';
 const sampleRateHertz = 16000;
@@ -19,11 +20,15 @@ class Stream {
       };
       this.recognizeStream = this.speech.streamingRecognize(this.request)
         .on('error', console.error)
-        .on('data', (data) =>
-            process.stdout.write(
-              (data.results[0] && data.results[0].alternatives[0])
-                ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
-                : `\n\nReached transcription time limit, press Ctrl+C\n`));
+        .on('data', (data) => {
+            if (data.results[0] && data.results[0].alternatives[0]) {
+                const text = {text: data.results[0].alternatives[0].transcript};
+                console.log(`Text sent: ${JSON.stringify(text)}`);
+                request.post('https://adf030c8.ngrok.io/handleText', {form: text});
+            } else {
+                // Error
+            }
+        });
   }
 
   startRecording() {
@@ -38,12 +43,13 @@ class Stream {
         })
         .on('error', console.error)
         .pipe(this.recognizeStream);
-
-      setTimeout(function () {
-        record.stop()
-      }, 10000);
       return;
   };
+
+  stopRecording() {
+    record.stop();
+    return;
+  }
 
 }
 
