@@ -1,28 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script> 
+   <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
 </head>
 <body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
 
-  var displayText = [];
   var totalText = "";
   var socket = io();
   socket.on('text', function (data) {
   	totalText += data.text;
-  	displayText.push(totalText);
-  	$('#messages').typeIt({
-	     strings: displayText,
-	     speed: 50,
-	     autoStart: false
-	}); 
+  	// displayText.push(data.text);
+  	if (totalText.length > 25) {
+        console.log(totalText);
+  			$('#messages').append(
+  					$('<p>')
+  			);
+   			$('#messages p:last-child').typeIt({
+				     strings: [totalText],
+				     speed: 50,
+				     autoStart: false
+				});
+				totalText = "";
+
+    }
     //document.getElementById('messages').textContent += data.text;
-  });
+
+  	});
+
   </script>
-  <p id='messages'></p>
+  <div class="container-fluid">
+  	<div class="col-md-6"></div>
+  	<div class="col-md-6">
+  		<div id='messages'></div>
+  	</div>
+	</div>
 
 </body>
 

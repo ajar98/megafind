@@ -55,7 +55,7 @@ router.post('/handleText', async function(req, res, next) {
     winston.log('Start handling text');
 
     const text = req.body;
-    console.log(`Text received at handleText: ${JSON.sstringify(text)}`);
+    console.log(`Text received at handleText: ${JSON.stringify(text)}`);
     const io = req.app.get('io');
     io.emit('text', text);
     return res.status(200);

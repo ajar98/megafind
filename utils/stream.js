@@ -37,6 +37,7 @@ class Stream {
   }
 
   processText(rawText, cb) {
+      rawText = rawText.replace('i ', 'I ').replace('i\'', 'I\'');
       const sent = to.sentence(rawText);
       const first = sent.split(' ')[0];
       if (interrogatives.includes(first.toLowerCase())) {
