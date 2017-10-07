@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ajar98/no_tebooks/issues"
   },
-  "homepage": "https://github.com/ajar98/no_tebooks#readme"
+  "homepage": "https://github.com/ajar98/no_tebooks#readme",
+  "dependencies": {
+    "express": "^4.16.1"
+  }
 }
