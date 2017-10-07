@@ -1,20 +1,21 @@
-var aggregateWords = "";
+class Lecture {
 
-
-class lecture{
-    constructor(){
-
+    constructor({ id }){
+      this.id = id;
+      this.total = "";
     }
 
-    addWord(txt){
-        aggregateWords += txt;
-        return;
+    addWord (text) {
+        this.total += text;
     }
 
-    completeText(){
-        return aggregateWords;
+    getText () {
+        return this.total;
+    }
+
+    validateID (num) {
+      return num == this.id;
     }
 }
 
 module.exports = lecture;
-
