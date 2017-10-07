@@ -2,13 +2,24 @@
 <html>
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script> 
 </head>
 <body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
+
+  var displayText = [];
+  var totalText = "";
   var socket = io();
   socket.on('text', function (data) {
-    document.getElementById('messages').textContent += data.text;
+  	totalText += data.text;
+  	displayText.push(totalText);
+  	$('#messages').typeIt({
+	     strings: displayText,
+	     speed: 50,
+	     autoStart: false
+	}); 
+    //document.getElementById('messages').textContent += data.text;
   });
   </script>
   <p id='messages'></p>
