@@ -34,8 +34,3 @@ MLabClient.authenticateProfessor = (user, password, cb) => {
         });
     });
 }
-
-MLabClient.authenticateProfessor("carl", "wheezer", (result) => {
-    console.log(result);
-});
-

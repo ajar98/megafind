@@ -1,5 +1,6 @@
 const Stream = require('../utils/stream');
 const Lecture = require('../utils/lecture');
+const MLabClient = require('../utils/mlabClient')
 const express = require('express');
 const path = require('path');
 const winston = require('winston');
@@ -76,8 +77,9 @@ router.get('/authenticate', async function(req, res, next) {
   try {
     winston.log('Start authentication');
 
-    // const user = req.body;
-    // return res.status(200);
+    MLabClient.authenticateProfessor("carl", "wheezer", (result) => {
+        console.log(result);
+    });
   } catch (err) {
     winston.error('Failed to perform authentication.');
   }
