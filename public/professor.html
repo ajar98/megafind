@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+<style>
+#message-container {
+  height: 200px;
+}
+</style>
 <body>
   <script src="/socket.io/socket.io.js"></script>
   <script>
@@ -17,7 +23,7 @@
             console.log('clicked');
             $.ajax({
                 type: 'POST',
-                url: 'https://8e16fd68.ngrok.io/stream/start',
+                url: 'http://c10e1096.ngrok.io/stream/start',
             });
         });
     });
@@ -26,15 +32,21 @@
         $('#cease').click(function(event) {
             $.ajax({
                 type: 'POST',
-                url: 'https://8e16fd68.ngrok.io/stream/stop',
+                url: 'http://c10e1096.ngrok.io/stream/stop',
             });
         });
     });
   </script>
-  <p id='messages'></p>
-
-  <button id='record'>Start Lecture</button>
-  <button id='cease'>Stop Lecture</button>
+  <div class="container-fluid">
+    <center>
+      <div id="message-container">
+        <p id='messages'></p>
+      </div>
+      <button class="btn btn-success btn-lg" id='record'>Start Lecture</button>
+      <br><br>
+      <button class="btn btn-danger btn-lg" id='cease'>Stop Lecture</button>
+    </center>
+  </div>
 </body>
 
 </html>
