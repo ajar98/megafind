@@ -3,13 +3,14 @@ const uri = 'mongodb://megafind:megamind1@ds115085.mlab.com:15085/megafind';
 
 const MLabClient = module.exports;
 
-MLabClient.createProfessor = (user, password, students) => {
+MLabClient.createProfessor = (user, password, students, cb) => {
+    const studentsList = students.split(', ');
     MongoClient.connect(uri, function(err, db) {
        if (err) throw err;
        db.collection('professors').find({user: user}, (err, results) => {
             if (err) throw err;
             if (results.length != 0) {
-                db.collection('professors').insert( [{user, password, students}], function(err, result) {
+                db.collection('professors').insert( [{user, password, studentsList}], function(err, result) {
                     if(err) {
                         throw err;
                     }
@@ -17,9 +18,9 @@ MLabClient.createProfessor = (user, password, students) => {
                         if(err) throw err;
                     });
                 });
-                return true;
+                cb(true);
             } else {
-                return false;
+                cb(false);
             }
        });
    });

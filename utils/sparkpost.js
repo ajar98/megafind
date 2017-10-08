@@ -19,7 +19,7 @@ class sparkpost{
 
         from: this.address.toString(),
         subject: 'Lecture for ' + this.course,
-        html:'<html><body><p>Hello Class,</p><p>Here is the link to today\'s lecture <a href = "">'+ link+'</a> </p></body></html>'
+        html:'<html><body><p>Hello Class,</p><p>Here is the link to today\'s lecture <a href = "../digest.txt">'+ link+'</a> </p></body></html>'
            },
         recipients: [
         {address: 'kapurkartik1@gmail.com', 'kapurkartik@berkeley.edu'}

@@ -57,7 +57,7 @@
       display: none;
       padding: 6px 12px;
       border: none;
-  } 
+  }
 
   #slides-container {
     position: relative;
@@ -95,6 +95,26 @@
     //document.getElementById('messages').textContent += data.text;
 
   	});
+
+    socket.on('notes', function (data) {
+        console.log(data);
+        var textNotes = data.text;
+        $('#livenotes').val(textNotes);
+        $('#slides').src = data.slidesUrl;
+    });
+
+    $(function() {
+        $('#save').click(function(event) {
+            console.log('submitting');
+            $.ajax({
+                type: 'POST',
+                url: 'https://5d5ac170.ngrok.io/submitNotes',
+                data: {
+                    text: document.getElementById('livenotes').value
+                }
+            });
+        });
+    });
 
   function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -140,9 +160,11 @@
       </div>
 
       <div id="Notes" class="tabcontent">
+
         <textarea id="livenotes" cols="75" style="border: none"></textarea>
+        <button id="save" class="btn btn-success btn-lg">Save</button>
       </div>
-  		
+
   	</div>
 	</div>
 

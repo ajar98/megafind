@@ -13,6 +13,28 @@ class Lecture {
       this.entities = [];
       this.summarizer = new Summarizer();
       this.notes = [];
+      this.professor;
+      this.slidesUrl;
+    }
+
+    addNotes (notes) {
+        this.notes = notes;
+    }
+
+    addSlides (slidesUrl) {
+        this.slidesUrl = slidesUrl;
+    }
+
+    getSlidesUrl() {
+        return this.slidesUrl;
+    }
+
+    getNotes() {
+        return this.notes.join('\n\n');
+    }
+
+    addProfessor (professor) {
+        this.professor = professor;
     }
 
     addBlock (text) {

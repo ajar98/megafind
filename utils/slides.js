@@ -12,8 +12,9 @@ var TOKEN_PATH = TOKEN_DIR + 'slides.googleapis.com-nodejs-quickstart.json';
 
 Slides = module.exports;
 
-Slides.parseSlides = (presentationId, textSlides) => {
+Slides.parseSlides = (presentationId, cb) => {
         // Load client secrets from a local file.
+    console.log('starting to parse');
     fs.readFile('client_secret.json', function processClientSecrets(err, content) {
       if (err) {
         console.log('Error loading client secret file: ' + err);
@@ -50,12 +51,12 @@ Slides.parseSlides = (presentationId, textSlides) => {
               }
               oauth2Client.credentials = token;
               Slides.storeToken(token);
-              Slides.listSlides(oauth2Client, presentationId, textSlides);
+              Slides.listSlides(oauth2Client, presentationId, cb);
             });
           });
         } else {
           oauth2Client.credentials = JSON.parse(token);
-          Slides.listSlides(oauth2Client, presentationId, textSlides);
+          Slides.listSlides(oauth2Client, presentationId, cb);
         }
       });
     });
@@ -73,8 +74,9 @@ Slides.storeToken = (token) => {
     console.log('Token stored to ' + TOKEN_PATH);
 }
 
-Slides.listSlides = (auth, presentationId, textSlides) => {
+Slides.listSlides = (auth, presentationId, cb) => {
     // console.log(auth.credentials);
+    var textSlides = [];
     var slides = google.slides('v1');
     slides.presentations.get({
       auth,
@@ -110,6 +112,7 @@ Slides.listSlides = (auth, presentationId, textSlides) => {
         }
         textSlides.push(text);
       }
+      cb(textSlides);
     });
 }
 

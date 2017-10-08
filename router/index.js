@@ -1,4 +1,5 @@
 const Stream = require('../utils/stream');
+const Slides = require('../utils/slides');
 const Lecture = require('../utils/lecture');
 const MLabClient = require('../utils/mlabClient')
 const express = require('express');
@@ -41,7 +42,13 @@ router.get('/live', async function(req, res, next) {
   try {
     winston.info('Connected to live stream');
 
-    return res.status(200).sendFile(path.resolve('public/live.html'));
+    const io = req.app.get('io');
+    res.status(200).sendFile(path.resolve('public/live.html'));
+    setTimeout(function() {
+        const data = { text: lecture.getNotes(), slidesUrl: lecture.getSlidesUrl() };
+        io.emit('notes', data);
+    }, 3000);
+
   } catch (err) {
     winston.error('Failed to connect to live stream');
   }
@@ -53,8 +60,16 @@ router.get('/professor', async function(req, res, next) {
 
     return res.status(200).sendFile(path.resolve('public/professor.html'));
   } catch (err) {
-    winston.error('Failed to get professor')
+    winston.error('Failed to get professor');
   }
+});
+
+router.get('/login', async function(req, res, next) {
+    return res.status(200).sendFile(path.resolve('public/login.html'));
+});
+
+router.get('/create', async function(req, res, next) {
+    return res.status(200).sendFile(path.resolve('public/create.html'));
 });
 
 router.post('/handleText', async function(req, res, next) {
@@ -73,34 +88,59 @@ router.post('/handleText', async function(req, res, next) {
   }
 });
 
-router.get('/authenticate', async function(req, res, next) {
+router.post('/authenticate', async function(req, res, next) {
   try {
     winston.log('Start authentication');
 
-    MLabClient.authenticateProfessor("carl", "wheezer", (result) => {
-        console.log(result);
+    MLabClient.authenticateProfessor(req.body.user, req.body.password, (professor) => {
+        if (professor != null) {
+            lecture.addProfessor(professor);
+            return res.status(200).send({success: true});
+        } else {
+            console.log('failure');
+            return res.status(400);
+        }
+
     });
   } catch (err) {
     winston.error('Failed to perform authentication.');
   }
 });
 
-router.get('/createProfessor', async function(req, res, next) {
+router.post('/createProfessor', async function(req, res, next) {
   try {
     winston.log('Start create professor');
 
-    // const user = req.body;
-    // return res.status(200);
+    MLabClient.createProfessor(req.body.user, req.body.password, req.body.students, (success) => {
+        if (success) {
+            return res.status(200).send({success: true});
+        } else {
+            return res.status(400);
+        }
+
+    });
+
   } catch (err) {
     winston.error('Failed to create professor.');
   }
 });
 
-router.get('/submitNotes', async function(req, res, next) {
-    lecture.addNotes(req.body.notes);
+router.post('/readSlides', async function(req, res, next) {
+    const notes = [];
+    const slidesUrl = req.body.slidesUrl;
+    const presentationId = slidesUrl.split('/d/')[1].split('/')[0];
+    console.log(presentationId);
+    Slides.parseSlides(presentationId, (textNotes) => {
+        lecture.addNotes(textNotes);
+        lecture.addSlides(slidesUrl);
+    });
+    // console.log(slidesUrl);
+
 });
 
-
+router.post('/submitNotes', async function(req, res, next) {
+    lecture.addNotes([req.body.text]);
+});
 
 
 module.exports = router;
