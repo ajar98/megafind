@@ -24,6 +24,7 @@
     "node-record-lpcm16": "^0.3.0",
     "propercase": "^1.0.2",
     "ramda": "^0.24.1",
+    "request-promise": "^4.2.2",
     "socket.io": "^2.0.3",
     "string-capitalize-name": "^1.0.3",
     "to-case": "^2.0.0",
