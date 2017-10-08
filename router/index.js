@@ -72,6 +72,28 @@ router.post('/handleText', async function(req, res, next) {
   }
 });
 
+router.get('/authenticate', async function(req, res, next) {
+  try {
+    winston.log('Start authentication');
+
+    // const user = req.body;
+    // return res.status(200);
+  } catch (err) {
+    winston.error('Failed to perform authentication.');
+  }
+});
+
+router.get('/createProfessor', async function(req, res, next) {
+  try {
+    winston.log('Start create professor');
+
+    // const user = req.body;
+    // return res.status(200);
+  } catch (err) {
+    winston.error('Failed to create professor.');
+  }
+});
+
 
 
 
