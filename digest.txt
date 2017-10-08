@@ -1,6 +1,737 @@
 I. SUMMARY 
 
-I really like to say <b>hello</b> to <b>people</b>. We are building the <b>future</b> of <b>business</b> and <b>technology</b> Please like me. 
+I really like to say <b>hello</b> to <b>people</b>. We are building the <b>future</b> of <b>business</b> and <b>technology</b>. 
 
 II. NOTES 
+------------------------------------------------- 
+Pre Announcement
+---
+
+------------------------------------------------- 
+Midterm Date: http://shoutkey.com/some
+Two choices:
+
+A. Sunday March 19th: 4-6.
+B. April 5th - April 10th.
+
+For reference: Spring break is March 27th - March 31st
+
+------------------------------------------------- 
+http://shoutkey.com/but
+To what degree do you believe the following statement: Nearly anybody enrolled at Berkeley could achieve an A in CS61B.
+---Assume they can spend the entire summer preparing beforehand, hire a tutor during the semester, etc.
+
+---Strongly disagree
+---Disagree
+---Neutral
+---Agree
+---Strongly agree
+
+------------------------------------------------- 
+Growth vs. Fixed Mindset
+Students can be thought of as having either a “growth” mindset or a “fixed” mindset (based on research by Carol Dweck).
+---“In a fixed mindset students believe their basic abilities, their intelligence, their talents, are just fixed traits. They have a certain amount and that's that, and then their goal becomes to look smart all the time and never look dumb.”
+------Perhaps most damningly, having to put in effort is a sign of weakness!
+---“In a growth mindset students understand that their talents and abilities can be developed through effort, good teaching and persistence. They don't necessarily think everyone's the same or anyone can be Einstein, but they believe everyone can get smarter if they work at it.”
+Growing up and even through undergrad I was very much part of the “fixed mindset” camp.
+
+------------------------------------------------- 
+A Brief Aside
+Bloom’s Two Sigma Problem: In one experiment, student randomly picked for 1-on-1 teaching performed similarly to the top 2% of a simultaneous lecture course.
+
+------------------------------------------------- 
+Announcements
+HW2 due next Wednesday.
+---Will be out late tonight.
+---Application of disjoint sets towards a cool physics problem.
+
+Still waiting on Midterm 2 date.
+
+
+Roundtable discussions next Thursday: (Link)
+
+
+------------------------------------------------- 
+Announcements
+Project 2. Some lessons:
+---The database is a lie.
+---API design is hard. Your first design is probably going to be ugly.
+---Modular design is important.
+---Your choice of underlying data structures make a critical difference in how hard your code is to implement.
+---Inheritance and generics are not always the answer.
+---Tests are really useful help.
+---Working on a team has a complex human dimension and can be anywhere between infuriating and wonderful.
+
+For more software engineering, see CS169. 
+---Future HWs and project 3 will not feel quite like this one.
+
+------------------------------------------------- 
+Announcements
+How should you do well on midterm 2?
+---Go through the study guides soon after the relevant lecture.
+---Work on study guide problems independently, and discuss solutions with others.
+---Some problems require registration on Coursera (sorry).
+------Includes extra practice with various data structures topics, as well as a limitless pool of asymptotic runtime analysis problems.
+------Unfortunately, Coursera broke the exercises with a recent update, so these problems are on hold for now. Will let you know when they’re fixed.
+
+------------------------------------------------- 
+CS61B
+Lecture 21: Binary Search Trees
+---Binary Search Tree (intro)
+---BST Definitions
+---BST Operations
+---Performance
+
+------------------------------------------------- 
+Analysis of an OLLMap<Character, ?>
+In an earlier lecture, we implemented a map based on unordered arrays. For the order linked list map implementation below, name an operation that takes worst case linear time, i.e. Θ(N).
+size
+get
+containsKey
+put
+clear
+For space reasons, only keys are shown!
+---Values are not relevant to the discussion today.
+
+------------------------------------------------- 
+Analysis of an OLLMap<Character, ?>
+In an earlier lecture, we implemented a map based on unordered arrays. For the order linked list map implementation below, name an operation that takes worst case linear time, i.e. Θ(N).
+size
+get
+containsKey
+put
+clear
+For space reasons, only keys are shown!
+---Values are not relevant to the discussion today.
+sent
+7
+size
+
+------------------------------------------------- 
+Optimization: Extra Links
+Fundamental Problem: Slow search, even though it’s in order.
+A
+C
+B
+D
+E
+F
+G
+---Add (random) express lanes. Skip List (won’t discuss in 61B)
+
+------------------------------------------------- 
+Optimization: Change the Entry Point
+Fundamental Problem: Slow search, even though it’s in order.
+---Move pointer to middle.
+
+A
+C
+B
+D
+E
+F
+G
+
+------------------------------------------------- 
+Optimization: Change the Entry Point, Flip Links
+Fundamental Problem: Slow search, even though it’s in order.
+---Move pointer to middle and flip left links. Halved search time!
+
+A
+C
+B
+D
+E
+F
+G
+
+------------------------------------------------- 
+Optimization: Change the Entry Point, Flip Links
+Fundamental Problem: Slow search, even though it’s in order.
+---How do we do even better?
+---Dream big!
+
+A
+C
+B
+D
+E
+F
+G
+
+------------------------------------------------- 
+Optimization: Change Entry Point, Flip Links, Allow Big Jumps
+Fundamental Problem: Slow search, even though it’s in order.
+---How do we do better?
+
+A
+C
+B
+D
+E
+F
+G
+
+------------------------------------------------- 
+BST Definitions
+
+------------------------------------------------- 
+Tree
+A tree consists of:
+---A set of nodes.
+---A set of edges that connect those nodes.
+------Constraint: There is exactly one path between any two nodes.
+
+Green structures below are trees. Pink ones are not.
+
+------------------------------------------------- 
+Rooted Trees and Rooted Binary Trees
+A
+In a rooted tree, we call one node the root.
+---Every node N except the root has exactly one parent, defined as the first node on the path from N to the root.
+---Unlike (most) real trees, the root is usually depicted at the top of the tree.
+---A node with no child is called a leaf.
+In a rooted binary tree, every node has either 0, 1, or 2 children (subtrees).
+For each of these:
+---A is the root.
+---B is a child of A.     (and C of B) 
+---A is a parent of B.    (and B of C)
+
+Not binary!
+
+------------------------------------------------- 
+Binary Search Trees
+A binary search tree is a rooted binary tree with the BST property.
+
+BST Property. For every node X in the tree:
+---Every key in the left subtree is less than X’s key.
+---Every key in the right subtree is greater than X’s key.
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+debt
+bus
+ears
+axe
+cow
+fish
+gut
+
+------------------------------------------------- 
+Binary Search Trees
+Ordering must be complete, transitive, and antisymmetric. Given keys p and q:
+---Exactly one of p ≺ q and q ≺ p are true.
+---p ≺ q and q ≺ r imply p ≺ r.
+
+One consequence of these rules: No duplicate keys allowed!
+---Keeps things simple. Most real world implementations follow this rule.
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+debt
+bus
+ears
+axe
+cow
+fish
+gut
+
+------------------------------------------------- 
+BST Operations
+
+------------------------------------------------- 
+Finding a searchKey in a BST (come back to this for Lab8!)
+If searchKey equals label, return.
+---If searchKey ≺ label, search left.
+---If searchKey ≻ label, search right. 
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+
+------------------------------------------------- 
+Finding a searchKey in a BST
+If searchKey equals label, return.
+---If searchKey ≺ label, search left.
+---If searchKey ≻ label, search right.  
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+static BST find(BST T, Key sk) {
+   if (T == null)
+      return null;
+   if (sk.keyequals(T.label()))
+      return T;
+   else if (sk ≺ T.label())
+      return find(T.left, sk);
+   else
+      return find(T.right, sk);
+}
+
+
+------------------------------------------------- 
+BST Search (Poll Everywhere!): N is the number of nodes (15)
+What is the runtime to complete a search on a “bushy” BST in the worst case?
+---Θ(log N)
+---Θ(N)
+---Θ(N log N)
+---Θ(N2)
+---Θ(2N)
+“bushiness” is an intuitive concept that we haven’t defined.
+
+------------------------------------------------- 
+BST Search
+What is the runtime to complete a search on a “bushy” BST in the worst case?
+---Θ(log N)
+Height of the tree is ~log2(N)
+
+------------------------------------------------- 
+BSTs
+Bushy BSTs are extremely fast.
+---At 1 microsecond per operation, can find something from a tree of size 10300000 in one second.
+
+Much (perhaps most?) computation is dedicated towards finding things in response to queries.
+---It’s a good thing that we can do such queries almost for free.
+
+------------------------------------------------- 
+Inserting a new key into a BST
+Search for key.
+---If found, do nothing.
+---If not found:
+------Create new node.
+------Set appropriate link.
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+Example: 
+insert “eyes”
+eyes
+
+------------------------------------------------- 
+Inserting a new key into a BST
+Search for key.
+---If found, do nothing.
+---If not found:
+------Create new node.
+------Set appropriate link.
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+eyes
+A common rookie bad habit to avoid:
+static BST insert(BST T, Key ik) {
+  if (T == null)
+    return new BST(ik);
+  if (ik ≺ T.label()))
+    T.left = insert(T.left, ik);
+  else if (ik ≻ T.label())
+    T.right = insert(T.right, ik);
+  return T;
+}
+
+  if (T.left == null)
+    T.left = new BST(ik);
+  else if (T.right == null)
+    T.right = new BST(ik);
+ezz
+
+------------------------------------------------- 
+Deleting from a BST
+3 Cases:
+---Deletion key has no children.
+---Deletion key has one child.
+---Deletion key has two children.
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+eyes
+
+------------------------------------------------- 
+Case 1: Deleting from a BST: Key with no Children
+Deletion key has no children (“glut”):
+---Just sever the parent’s link.
+---What happens to “glut” node?
+dog
+bag
+flat
+alf
+cat
+elf
+eyes
+glut
+
+------------------------------------------------- 
+Case 1: Deleting from a BST: Key with no Children
+Deletion key has no children (“glut”):
+---Just sever the parent’s link.
+---What happens to “glut” node?
+------Garbage collected.
+dog
+bag
+flat
+alf
+cat
+elf
+eyes
+glut
+
+------------------------------------------------- 
+Case 2: Deleting from a BST: Key with one Child
+Example: delete(“flat”):
+
+
+Goal:
+---Maintain BST property.
+---Flat’s child definitely larger than dog.
+------Safe to just move that child into flat’s spot.
+--
+Thus: Move flat’s parent’s pointer to flat’s child.
+dog
+bag
+alf
+cat
+elf
+eyes
+flat
+
+------------------------------------------------- 
+Case 2: Deleting from a BST: Key with one Child
+Example: delete(“flat”):
+
+
+Goal:
+---Maintain BST property.
+---Flat’s child definitely larger than dog.
+------Safe to just move that child into flat’s spot.
+
+Thus: Move flat’s parent’s pointer to flat’s child.
+---Flat will be garbage collected. 
+dog
+bag
+alf
+cat
+elf
+eyes
+
+------------------------------------------------- 
+Hard Challenge
+Delete k.
+e
+b
+g
+a
+d
+f
+v
+p
+y
+m
+r
+x
+z
+k
+
+------------------------------------------------- 
+Hard Challenge
+Delete k.
+e
+b
+g
+a
+d
+f
+v
+p
+y
+m
+r
+x
+z
+k
+
+------------------------------------------------- 
+Case 3: Deleting from a BST: Deletion with two Children (Hibbard)
+Example: delete(“dog”)
+
+
+Goal:
+---Find a new root node.
+---Must be > than everything in left subtree.
+---Must be < than everything right subtree.
+Would bag work? 
+
+dog
+bag
+flat
+alf
+cat
+elf
+glut
+eyes
+
+------------------------------------------------- 
+Example: delete(“dog”)
+
+
+Goal:
+---Find a new root node.
+---Must be > than everything in left subtree.
+---Must be < than everything right subtree.
+Choose either predecessor (“cat”) or successor (“elf”).
+---Delete “cat” or “elf”, and stick new copy in the root position:
+------This deletion guaranteed to be either case 1 or 2. Why?
+---This strategy is sometimes known as “Hibbard deletion”.
+dog
+bag
+flat
+alf
+glut
+eyes
+cat
+elf
+Case 3: Deleting from a BST: Deletion with two Children (Hibbard)
+
+------------------------------------------------- 
+Hard Challenge (Hopefully Now Easy)
+Delete k.
+e
+b
+g
+a
+d
+f
+v
+p
+y
+m
+r
+x
+z
+k
+
+------------------------------------------------- 
+Hard Challenge (Hopefully Now Easy)
+Delete k. Two solutions: Either promote g or m to be in the root.
+---Below, solution for g is shown.
+e
+b
+g
+a
+d
+f
+v
+p
+y
+m
+r
+x
+z
+k
+
+------------------------------------------------- 
+Hard Challenge (Hopefully Now Easy)
+Two solutions: Either promote g or m to be in the root.
+---Below, solution for g is shown.
+e
+b
+g
+a
+d
+f
+v
+p
+y
+m
+r
+x
+z
+
+------------------------------------------------- 
+BST Performance
+
+------------------------------------------------- 
+Tree Height
+Height varies dramatically between “bushy” and “spindly” trees.
+v
+p
+y
+m
+r
+x
+z
+k
+v
+y
+z
+k
+H=3
+H=3
+
+------------------------------------------------- 
+Tree Height: http://shoutkey.com/bleak
+Height varies dramatically between “bushy” and “spindly” trees.
+v
+p
+y
+m
+r
+x
+z
+k
+v
+y
+z
+k
+H=3
+H=3
+Let H(N) be the height of a tree with N nodes. Give H(N) in Big-Theta notation for “bushy” and “spindly” trees, respectively:
+---Θ(log(N)), 	Θ(log(N))
+---Θ(log(N)), 	Θ(N)
+---Θ(N), 		Θ(log(N))
+---Θ(N), 		Θ(N)
+
+------------------------------------------------- 
+Tree Height
+Height varies dramatically between “bushy” and “spindly” trees.
+v
+p
+y
+m
+r
+x
+z
+k
+v
+y
+z
+k
+H = Θ(N) 
+H=3
+H=3
+H = Θ(log(N)) 
+Performance of spindly trees can be just as bad as a linked list!
+---Example: containsKey(“z”) would take linear time.
+
+------------------------------------------------- 
+BST Insertion Demo
+
+
+
+
+
+
+
+
+
+
+
+Video courtesy of Kevin Wayne (Princeton University)
+
+Nice Property. Random inserts take on average only Θ(log N) each. 
+
+------------------------------------------------- 
+BST: Mathematical Analysis
+Comparison Counting. If N distinct keys are inserted into a BST, the expected average number of compares per insert is C(N) ~ 2 ln N = Θ(log N)
+---Will discuss this proof briefly towards the end of this course.
+
+Tree Height. If N distinct keys are inserted in random order, expected tree height H(N) ~ 4.311 ln N (see Reed, 2003).
+
+Recall tilde notation from Asymptotics 3 lecture:
+---Similar to BigTheta, but don’t throw away the multiplicative constant.
+
+Formal definition: f(x) ~ g(x) means that 
+
+------------------------------------------------- 
+BST Deletion Demo
+
+
+
+
+
+
+
+
+
+Surprising Fact. Trees not balanced!  C(N) ~ sqrt(N) per operation.
+Open Problem. Find a simple and efficient delete for BSTs. 
+Video courtesy of Kevin Wayne (Princeton University)
+
+
+------------------------------------------------- 
+Summary
+Binary search trees: Efficient data structures for supporting insertion and search.
+---Operations on “Bushy” BSTs are logarithmic time.
+---Insertion of random data yields a bushy BST.
+------On random data, order of growth for get/put operations is logarithmic.
+
+Performance issues:
+---“Spindly” trees have linear performance.
+---Hibbard deletion results in order of growth that is sqrt(N).
+------Nobody knows how to do better on simple BSTs.
+---
+Lab this week: Implementing a BSTMap.
+Next time: Fixing these performance issues.
+
+
+------------------------------------------------- 
+BST Implementation Tips 
+
+------------------------------------------------- 
+static BST insert(BST T, Key ik) {
+  if (T == null)
+    return new BST(ik);
+  if (ik ≺ T.label()))
+    T.left = insert(T.left, ik);
+  else if (ik ≻ T.label())
+    T.right = insert(T.right, ik);
+  return T;
+}
+
+Tips for Lab8
+---Code from class was “naked recursion”. Your BSTMap will not be.
+---For each public method, e.g. put(K key, V value), create a private recursive method, e.g. put(K key, V value, Node n)
+---When inserting, always set left/right pointers, even if nothing is actually changing.
+---Avoid “arms length base cases”. Don’t check if left or right is null!
+Always set, even if nothing changes!
+Avoid “arms length base cases”.
+  if (T.left == null)
+    T.left = new BST(ik);
+  else if (T.right == null)
+    T.right = new BST(ik);
+
+------------------------------------------------- 
+Citations
+Probably photoshopped binary tree: http://cs.au.dk/~danvy/binaries.html
+
+Demo movies for binary search tree operations: Kevin Wayne (Princeton University)
+
+------------------------------------------------- 
+
 III. KEYWORDS 
