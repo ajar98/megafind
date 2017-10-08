@@ -10,6 +10,10 @@ const router = express.Router();
 const stream = new Stream();
 const lecture = new Lecture();
 
+router.get('/', async function(req, res, next) {
+    return res.status(200).sendFile(path.resolve('public/index.html'));
+});
+
 router.post('/stream/start', async function(req, res, next) {
     try {
       winston.info('Starting stream');
@@ -36,7 +40,7 @@ router.get('/live', async function(req, res, next) {
   try {
     winston.info('Connected to live stream');
 
-    return res.status(200).sendFile(path.resolve('views/live.html'));
+    return res.status(200).sendFile(path.resolve('public/live.html'));
   } catch (err) {
     winston.error('Failed to connect to live stream');
   }
@@ -46,7 +50,7 @@ router.get('/professor', async function(req, res, next) {
   try {
     winston.info('Starting to get professor');
 
-    return res.status(200).sendFile(path.resolve('views/professor.html'));
+    return res.status(200).sendFile(path.resolve('public/professor.html'));
   } catch (err) {
     winston.error('Failed to get professor')
   }
