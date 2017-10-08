@@ -94,6 +94,10 @@ router.get('/createProfessor', async function(req, res, next) {
   }
 });
 
+router.get('/submitNotes', async function(req, res, next) {
+    lecture.addNotes(req.body.notes);
+});
+
 
 
 
