@@ -41,4 +41,4 @@ Search.handleBody = (response) => {
     return (dictionaryResult || wikipediaResult);
 }
 
-Search.getSnippet('wikipedia').then((result) => console.log(result));
+// Search.getSnippet('wikipedia').then((result) => console.log(result));
