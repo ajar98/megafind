@@ -1,4 +1,5 @@
 const Stream = require('../utils/stream');
+const Lecture = require('../utils/lecture');
 const express = require('express');
 const path = require('path');
 const winston = require('winston');
@@ -7,6 +8,7 @@ const router = express.Router();
 
 // const summarizer = new Summarizer();
 const stream = new Stream();
+const lecture = new Lecture();
 
 router.post('/stream/start', async function(req, res, next) {
     try {
@@ -57,7 +59,9 @@ router.post('/handleText', async function(req, res, next) {
     const text = req.body;
     console.log(`Text received at handleText: ${JSON.stringify(text)}`);
     const io = req.app.get('io');
-    io.emit('text', text);
+    const textWithEntities = await lecture.generateTextWithEntities(text.text);
+    console.log(`Text with entities: ${textWithEntities}`);
+    io.emit('text', {text: textWithEntities});
     return res.status(200);
   } catch (err) {
     winston.error('Failed to handle text');
