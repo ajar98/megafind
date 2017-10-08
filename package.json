@@ -20,7 +20,10 @@
     "express": "^4.16.1",
     "google-cloud": "^0.57.0",
     "node-record-lpcm16": "^0.3.0",
+    "propercase": "^1.0.2",
+    "ramda": "^0.24.1",
     "socket.io": "^2.0.3",
+    "string-capitalize-name": "^1.0.3",
     "to-case": "^2.0.0",
     "winston": "^2.4.0",
     "wordpos": "^1.1.5"
