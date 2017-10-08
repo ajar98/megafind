@@ -8,7 +8,7 @@ class Summarizer {
         url: 'http://api.intellexer.com/summarizeText',
         qs:
          { apikey: '0d175b94-7204-45cd-9231-87178dbdb22f',
-           summaryRestriction: '8',
+           summaryRestriction: '2',
            returnedTopicsCount: '2',
            loadConceptsTree: 'false',
            loadNamedEntityTree: 'false',
@@ -23,6 +23,7 @@ class Summarizer {
   };
 
   summarizeText (text) {
+    console.log('IN SUMMARIZE TEXT. TEXT:', text)
     this.options.body = text;
     return request(this.options).then((body) => {
       body = JSON.parse(body);
@@ -39,6 +40,6 @@ class Summarizer {
   }
 }
 
-
-const s = new Summarizer();
-s.summarizeText(text).then((result) => console.log(result));
+module.exports = Summarizer;
+//const s = new Summarizer();
+//s.summarizeText(text).then((result) => console.log(result));
