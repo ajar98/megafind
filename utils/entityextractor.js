@@ -1,6 +1,8 @@
-const Language = require('@google-cloud/language');2
+const Language = require('@google-cloud/language');
+const R = require('ramda');
+const to = require('to-case');
 
-class Entity {
+class EntityExtractor {
     constructor () {
       this.language = Language();
     }
@@ -11,17 +13,29 @@ class Entity {
       type = 'PLAIN_TEXT'
     }
     */
-    getEntities(doc) {
-      return this.language.analyzeEntities({ document: doc }).then((results) => {
-        const result = {}
+    async getEntities(text) {
+      text = to.capital(text);
+      const entities = await this.language.analyzeEntities({ document: {content: text, type: 'PLAIN_TEXT'} }).then((results) => {
+        const result = {};
         const entities = results[0].entities;
 
-        entities.forEach((entity) => {
+        console.log(`${JSON.stringify(entities)}`);
+
+        // var i = 0;
+        R.forEach((entity) => {
           if (entity.metadata && entity.metadata.wikipedia_url) {
             result[`${entity.name}`] = entity.metadata.wikipedia_url;
           }
-        })
-        return result
+          // if (i == entities.length) {
+          //     cb(result);
+          // };
+        }, entities);
+        return result;
+
       });
+      return entities;
     }
 }
+
+
+module.exports = EntityExtractor;
