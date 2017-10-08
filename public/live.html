@@ -16,14 +16,14 @@
       background-attachment: fixed;
       */
   }
-  h3 {
-    font-family: Helvetica;
+  h2, h3 {
+    font-family: Georgia;
   }
   #messages {
     font-family: Helvetica;
     font-size: 20px;
   }
-    /* Style the tab */
+  /* Style the tab */
   div.tab {
       overflow: hidden;
       border: 1px solid #ccc;
@@ -39,7 +39,7 @@
       cursor: pointer;
       padding: 14px 16px;
       transition: 0.3s;
-      font-size: 17px;
+      font-family: Georgia;
   }
 
   /* Change background color of buttons on hover */
@@ -56,8 +56,13 @@
   .tabcontent {
       display: none;
       padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-top: none;
+      border: none;
+  } 
+
+  #slides-container {
+    position: relative;
+    width: "100%";
+    padding-bottom: "100%";
   }
 </style>
 <body>
@@ -74,12 +79,16 @@
   			$('#messages').append(
   					$('<p>')
   			);
-   			$('#messages p:last-child').typeIt({
-				     strings: [totalText],
-				     speed: 50,
-             cursor: false,
-				     autoStart: false
-				});
+        if ($("#transcript_btn").hasClass("active")) {
+     			$('#messages p:last-child').typeIt({
+  				     strings: [totalText],
+  				     speed: 50,
+               cursor: false,
+  				     autoStart: false
+  				});
+        } else {
+          $('#messages').append(totalText);
+        }
 				totalText = "";
 
     }
@@ -101,28 +110,31 @@
     evt.currentTarget.className += " active";
   }
 
+  $(document).ready(function() {
+    const slideWidth = $("#slides-container").width();
+    $("#slides").css("width", slideWidth + "px");
+    const slideHeight = slideWidth / 1.6;
+    $("#slides").css("height", slideHeight + "px");
+  });
 
   </script>
   <div class="container-fluid">
-  	<div class="col-md-6">
+  	<div class="col-md-6" id="slides-container">
       <center><h2>Lecture Slides</h2>
-      <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRrXiVVVFEwi87br_NMzdTpZKinT1OCLeacANumYCeAO_p-6O0R0w9lMnm3eze_-kzW45DKZrlwfj1S/embed?start=false&loop=false&delayms=3000" frameborder="0" width="480" height="299" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" id="slides"></iframe></center>
+      <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRrXiVVVFEwi87br_NMzdTpZKinT1OCLeacANumYCeAO_p-6O0R0w9lMnm3eze_-kzW45DKZrlwfj1S/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true" id="slides"></iframe></center>
     </div>
   	<div class="col-md-6" id="message-background">
       <div class="tab">
-        <button class="tablinks" onclick="openTab(event, 'Transcript')">Transcript</button>
-        <button class="tablinks" onclick="openTab(event, 'Notes')">Notes</button>
+        <button class="tablinks" id="transcript_btn" onclick="openTab(event, 'Transcript')">Transcript</button>
+        <button class="tablinks" id="notes_btn" onclick="openTab(event, 'Notes')">Notes</button>
       </div>
 
       <div id="Transcript" class="tabcontent">
-        <h3>Live Transcript</h3>
         <div id='messages'></div>
       </div>
 
       <div id="Notes" class="tabcontent">
-        <h3>Notes</h3>
-        <textarea rows="5" cols="75">
-        </textarea>
+        <textarea rows="20" cols="75" style="border: none"></textarea>
       </div>
   		
   	</div>
