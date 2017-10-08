@@ -7,6 +7,7 @@ class Lecture {
       // this.id = id;
       this.document = [];
       this.entityExtractor = new EntityExtractor();
+      this.entities = [];
     }
 
     addBlock (text) {
@@ -17,6 +18,10 @@ class Lecture {
         return this.document;
     }
 
+    getEntities() {
+        return this.entities;
+    }
+
     async generateTextWithEntities(block) {
         const result = await this.entityExtractor.getEntities(block).then((results) => {
             let textWithEntities = block;
@@ -24,6 +29,7 @@ class Lecture {
             R.forEach((entry) => {
                 // i++;
                 // console.log(entry);
+                this.entities.push(entry);
                 textWithEntities = textWithEntities.replace(new RegExp(entry[0], "i"), `<a href=${entry[1]}>${entry[0]}</a>`);
                 // if (i == results.length) {
                 //     return block;
