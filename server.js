@@ -3,6 +3,7 @@ const router = require('./router/index');
 const bodyParser = require('body-parser');
 const app = express();
 const io = require('socket.io').listen(app.listen(3000));
+const Lecture = require('./utils/lecture');
 const winston = require('winston');
 
 // every request goes through the router
