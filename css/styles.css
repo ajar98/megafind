@@ -1,0 +1,14 @@
+html, body {
+	height: 100%;
+	background: url(../images/megafind_bg.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+}
+
+#title {
+	height: 33%;
+	vertical-align: center;
+
+}
