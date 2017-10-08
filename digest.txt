@@ -1,14 +1,14 @@
 I. SUMMARY 
 
-Like <b>know</b> what's his <b>name</b> was <b>martin luther king</b> jr. when he was assassinated by <b>lee harvey oswald</b> in 1961. 
+Former <b>president</b> <b>barack obama</b> is known for his <b>charisma</b> and good looks his vice president joe biden is also known for the same things. 
 
 II. NOTES 
 ------------------------------------------------- 
-Demo
-KAAK
+MegaFind Demo
+Ajay Raj, Kian Hooshmand, Kartik Kapur, Anthony Yu
 
 ------------------------------------------------- 
-Slide 1
+Barack Obama
 Content 1
 
 ------------------------------------------------- 
@@ -30,5 +30,4 @@ Content 5
 ------------------------------------------------- 
 
 III. KEYWORDS 
-Lee Harvey Oswald: Lee Harvey Oswald (October 18, 1939 – November 24, 1963) was an American former U.S. Marine who assassinated United States President John F. Kennedy ... 
-Martin Luther King Jr: Martin Luther King Jr was an American Baptist minister and activist who became the most visible spokesperson and leader in the Civil Rights Movement. 
+Joe Biden: Joseph Robinette "Joe" Biden Jr is an American politician who was the 47th Vice President of the United States from 2009 to 2017. A member of the Democratic ... 

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ajar98/no_tebooks#readme",
   "dependencies": {
+    "aws-sdk": "^2.130.0",
     "express": "^4.16.1",
     "google": "^2.1.0",
     "google-cloud": "^0.57.0",
@@ -27,6 +28,7 @@
     "ramda": "^0.24.1",
     "request-promise": "^4.2.2",
     "socket.io": "^2.0.3",
+    "sparkpost": "^2.1.2",
     "string-capitalize-name": "^1.0.3",
     "to-case": "^2.0.0",
     "winston": "^2.4.0",

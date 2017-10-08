@@ -112,6 +112,7 @@ Slides.listSlides = (auth, presentationId, cb) => {
         }
         textSlides.push(text);
       }
+      console.log('finished parsing');
       cb(textSlides);
     });
 }

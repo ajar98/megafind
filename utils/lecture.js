@@ -3,6 +3,14 @@ const Summarizer = require('./summarizer');
 const Search = require('./search');
 const R = require('ramda');
 const fs = require('fs');
+const SparkPostClient = require('./sparkpost')
+var AWS = require('aws-sdk');
+
+const DIGEST_LINK = 'https://s3.amazonaws.com/megafind-digest/digest.txt'
+
+AWS.config.loadFromPath('aws-credentials.json');
+
+var s3 = new AWS.S3();
 
 class Lecture {
 
@@ -111,6 +119,29 @@ class Lecture {
           stream.end();
       })
     });
+    var s3Bucket = new AWS.S3( { params: {Bucket: 'megafind-digest'} } )
+
+    setTimeout(function() {
+      fs.readFile('digest.txt', function (err, data) {
+          if (err) throw err;
+          var params = {Bucket: 'megafind-digest', Key: 'digest.txt', Body: data};
+          s3.putObject(params, function(err, data) {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log("Successfully uploaded data to megafind-digest/digest.txt");
+                const sp = new SparkPostClient();
+                sp.sendMail(DIGEST_LINK);
+            }
+         });
+
+      });
+    }, 3000);
+
+
+
+
+
     }
 }
 
