@@ -76,11 +76,14 @@ class Lecture {
     close() {
 
       let lectureText = "";
-      for (let i =0; i < this.document.length; i += 1) {
+      console.log('DOCUMENT', this.document);
+      for (let i = 0; i < this.document.length; i += 1) {
         lectureText += this.document[i] + " "
       }
       const notes = this.notes;
       const entities = this.entities;
+      console.log('ENTITIES', entities);
+      console.log('NOTES', notes);
       const a = this.summarizer.summarizeText(lectureText).then((result) => {
         console.log('HI')
         const stream = fs.createWriteStream('./digest.txt');

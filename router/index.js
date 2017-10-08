@@ -28,14 +28,15 @@ router.post('/stream/start', async function(req, res, next) {
 });
 
 router.post('/stream/stop', async function(req, res, next) {
-    try {
+    // try {
       winston.info('Stopping stream.');
 
       stream.stopRecording();
+      lecture.close();
       return res.status(200);
-    } catch (err) {
-      winston.error('Failed to stop stream');
-    }
+    // } catch (err) {
+      // winston.error('Failed to stop stream');
+    // }
 });
 
 router.get('/live', async function(req, res, next) {
@@ -77,6 +78,7 @@ router.post('/handleText', async function(req, res, next) {
     winston.log('Start handling text');
 
     const text = req.body;
+    lecture.addBlock(text.text);
     console.log(`Text received at handleText: ${JSON.stringify(text)}`);
     const io = req.app.get('io');
     const textWithEntities = await lecture.generateTextWithEntities(text.text);
