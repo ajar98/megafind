@@ -20,6 +20,8 @@ winston.add(
   }
 )
 
+app.use(express.static(__dirname + '/public'));
+
 app.use('/', router);
 
 io.on('connection', function (socket) {
