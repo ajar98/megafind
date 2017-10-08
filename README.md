@@ -9,16 +9,3 @@ At the end of the lecture, Megafind sends each student a copy of their "lecture 
 1. A summary of the lecture using the transcript we have compiled.
 2. The notes that they took on top of the bullets we provided.
 3. Each keyword that we picked up on compiled into a list with a short summary of its definition (for study guides/quick reference).
-
-##How to Use:
-1. Clone the repo and download the dependencies by writing'npm install' and 'npm install mongodb'
-2. Download [ngrok](https://ngrok.com/download)
-3. Go into your directory that has ngrok
-4. Run the following command 'export GOOGLE_SEARCH_API_KEY=AIzaSyBVuS6VE_gQVgjDOLb17x86Gldf1rIJg4A'
-5. Run the following command './ngrok http 3000'
-6. Replace the usages of anything with ngrok in the files with the provided url from step 5
-7. Go back to the main directory and run 'node server.js'
-8. Open up https://your_ngrok_url.io/live and https://your_ngrok_url.io/professor
-9. Click Start Lecture on the professor tab and then migrate to the live tab. 
-10. Go through the slides, view the slides, and write the notes as you please.
-11. Terminate the session by going to the professor tab and press Stop Lecture
