@@ -23,7 +23,7 @@
             console.log('clicked');
             $.ajax({
                 type: 'POST',
-                url: 'https://8e16fd68.ngrok.io/stream/start',
+                url: 'https://5d5ac170.ngrok.io/stream/start',
             });
         });
     });
@@ -32,7 +32,7 @@
         $('#cease').click(function(event) {
             $.ajax({
                 type: 'POST',
-                url: 'https://8e16fd68.ngrok.io/stream/stop',
+                url: 'https://5d5ac170.ngrok.io/stream/stop',
             });
         });
     });
@@ -41,7 +41,7 @@
         $('#submit').click(function(event) {
             $.ajax({
                 type: 'POST',
-                url: 'https://8e16fd68.ngrok.io/readSlides',
+                url: 'https://5d5ac170.ngrok.io/readSlides',
                 data: {
                     slidesUrl: document.getElementById('link').value
                 }

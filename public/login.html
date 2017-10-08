@@ -30,7 +30,7 @@
                 console.log('submitted');
                 $.ajax({
                     type: 'POST',
-                    url: 'https://8e16fd68.ngrok.io/authenticate',
+                    url: 'https://5d5ac170.ngrok.io/authenticate',
                     data: {
                         user: document.getElementById('username').value,
                         password: document.getElementById('password').value
@@ -38,7 +38,7 @@
                 })
                 .done(function() {
                     console.log('Login success');
-                    window.location.replace('https://8e16fd68.ngrok.io/professor');
+                    window.location.replace('https://5d5ac170.ngrok.io/professor');
                 })
                 .fail(function() {
                     console.log('Failure');

@@ -45,14 +45,9 @@ router.get('/live', async function(req, res, next) {
     const io = req.app.get('io');
     res.status(200).sendFile(path.resolve('public/live.html'));
     setTimeout(function() {
-        const data = {text: lecture.getNotes()};
+        const data = { text: lecture.getNotes(), slidesUrl: lecture.getSlidesUrl() };
         io.emit('notes', data);
     }, 3000);
-
-
-    // setTimeout(function() {
-    //
-    // })
 
   } catch (err) {
     winston.error('Failed to connect to live stream');
@@ -65,7 +60,7 @@ router.get('/professor', async function(req, res, next) {
 
     return res.status(200).sendFile(path.resolve('public/professor.html'));
   } catch (err) {
-    winston.error('Failed to get professor')
+    winston.error('Failed to get professor');
   }
 });
 
@@ -134,11 +129,17 @@ router.post('/readSlides', async function(req, res, next) {
     const notes = [];
     const slidesUrl = req.body.slidesUrl;
     const presentationId = slidesUrl.split('/d/')[1].split('/')[0];
+    console.log(presentationId);
     Slides.parseSlides(presentationId, (textNotes) => {
         lecture.addNotes(textNotes);
+        lecture.addSlides(slidesUrl);
     });
     // console.log(slidesUrl);
 
+});
+
+router.post('/submitNotes', async function(req, res, next) {
+    lecture.addNotes([req.body.text]);
 });
 
 

@@ -28,7 +28,7 @@ class Stream {
             if (data.results[0] && data.results[0].alternatives[0]) {
                 const rawText = data.results[0].alternatives[0].transcript;
                 this.processText(rawText, (cleaned) => {
-                    request.post('https://8e16fd68.ngrok.io/handleText', {form: {text: cleaned}});
+                    request.post('https://5d5ac170.ngrok.io/handleText', {form: {text: cleaned}});
                     console.log(`Text sent: ${JSON.stringify(cleaned)}`);
                 });
 

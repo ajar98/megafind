@@ -14,10 +14,19 @@ class Lecture {
       this.summarizer = new Summarizer();
       this.notes = [];
       this.professor;
+      this.slidesUrl;
     }
 
     addNotes (notes) {
         this.notes = notes;
+    }
+
+    addSlides (slidesUrl) {
+        this.slidesUrl = slidesUrl;
+    }
+
+    getSlidesUrl() {
+        return this.slidesUrl;
     }
 
     getNotes() {

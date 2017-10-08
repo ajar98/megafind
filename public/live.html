@@ -100,7 +100,21 @@
         console.log(data);
         var textNotes = data.text;
         $('#livenotes').val(textNotes);
-    })
+        $('#slides').src = data.slidesUrl;
+    });
+
+    $(function() {
+        $('#save').click(function(event) {
+            console.log('submitting');
+            $.ajax({
+                type: 'POST',
+                url: 'https://5d5ac170.ngrok.io/submitNotes',
+                data: {
+                    text: document.getElementById('livenotes').value
+                }
+            });
+        });
+    });
 
   function openTab(evt, tabName) {
     var i, tabcontent, tablinks;
@@ -141,6 +155,7 @@
 
       <div id="Notes" class="tabcontent">
         <textarea id="livenotes" rows="20" cols="75" style="border: none"></textarea>
+        <button id="save" class="btn btn-success btn-lg">Save</button>
       </div>
 
   	</div>
