@@ -29,23 +29,9 @@
 	<div class="container-fluid" id="content">
 		<center>
 			<img src="images/megafind_title.png" id="title"><br>
-			<button class="btn btn-primary btn-lg" id="start" onclick="login()">Start Session</button><br><br><br>
-			<button class="btn btn-info btn-lg" id="join" onclick="createAccount()">Join Session</button>
+			<button class="btn btn-primary btn-lg" id="login" onclick="location.href='https://8e16fd68.ngrok.io/login';">Login</button><br><br><br>
+			<button class="btn btn-info btn-lg" id="create" onclick="location.href='https://8e16fd68.ngrok.io/create';">Create a New Account</button>
 		</center>
 	</div>
-
-	<script>
-  function createAccount() {
-    var user = prompt("Please enter your username", "Username");
-    var password = prompt("Please enter your password", "Password");
-    window.location.replace("live.html");
-  }
-
-		function createAccount() {
-			var user = prompt("Please enter a username", "Username");
-			var password = prompt("Please enter a password", "Password");
-			window.location.replace("live.html");
-		}
-	</script>
 </body>
 </html>

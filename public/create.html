@@ -30,26 +30,27 @@
                 console.log('submitted');
                 $.ajax({
                     type: 'POST',
-                    url: 'https://8e16fd68.ngrok.io/authenticate',
+                    url: 'https://8e16fd68.ngrok.io/createProfessor',
                     data: {
                         user: document.getElementById('username').value,
-                        password: document.getElementById('password').value
+                        password: document.getElementById('password').value,
+                        students: document.getElementById('students').value
                     }
                 })
                 .done(function() {
-                    console.log('Login success');
+                    console.log('Success');
                     window.location.replace('https://8e16fd68.ngrok.io/professor');
                 })
                 .fail(function() {
-                    console.log('Failure');
-                    document.getElementById('content').innerHTML += 'Login failed';
-                });
+                    document.getElementById('content').innerHTML += 'Create failed';
+                })
+                ;
             });
         });
 
     </script>
 
-  	<title>MegaFind - Login</title>
+  	<title>MegaFind - Create a New Account</title>
 </head>
 <body>
   <div class="container-fluid" id="content">
@@ -57,7 +58,10 @@
       <img src="images/megafind_title.png" id="title"><br>
         <input type="text" id="username" placeholder="Username"><br>
         <input type="password" id="password" placeholder="Password">
-        <br><br>
+        <br>
+        <input type="text" id="students" placeholder="Students">
+        <br>
+        <br>
         <button id="submit">Submit</button>
     </center>
   </div>

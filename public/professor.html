@@ -23,7 +23,7 @@
             console.log('clicked');
             $.ajax({
                 type: 'POST',
-                url: 'http://c10e1096.ngrok.io/stream/start',
+                url: 'https://8e16fd68.ngrok.io/stream/start',
             });
         });
     });
@@ -32,7 +32,19 @@
         $('#cease').click(function(event) {
             $.ajax({
                 type: 'POST',
-                url: 'http://c10e1096.ngrok.io/stream/stop',
+                url: 'https://8e16fd68.ngrok.io/stream/stop',
+            });
+        });
+    });
+
+    $(function() {
+        $('#submit').click(function(event) {
+            $.ajax({
+                type: 'POST',
+                url: 'https://8e16fd68.ngrok.io/readSlides',
+                data: {
+                    slidesUrl: document.getElementById('link').value
+                }
             });
         });
     });
@@ -42,6 +54,9 @@
       <div id="message-container">
         <p id='messages'></p>
       </div>
+      <input type="text" class="form-control" id="link" placeholder="Enter Google Slides URL"></input>
+      <button class="btn btn-primary btn-lg" id='submit'>Submit</button>
+      <br><br><br><br>
       <button class="btn btn-success btn-lg" id='record'>Start Lecture</button>
       <br><br>
       <button class="btn btn-danger btn-lg" id='cease'>Stop Lecture</button>
