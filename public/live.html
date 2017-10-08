@@ -115,6 +115,12 @@
     $("#slides").css("width", slideWidth + "px");
     const slideHeight = slideWidth / 1.6;
     $("#slides").css("height", slideHeight + "px");
+
+    const numRows = Math.floor((window.innerHeight - 50) / 12);
+    console.log(window.innerHeight);
+    console.log(numRows);
+
+    $("#livenotes").attr("rows", numRows);
   });
 
   </script>
@@ -134,7 +140,7 @@
       </div>
 
       <div id="Notes" class="tabcontent">
-        <textarea rows="20" cols="75" style="border: none"></textarea>
+        <textarea id="livenotes" cols="75" style="border: none"></textarea>
       </div>
   		
   	</div>
