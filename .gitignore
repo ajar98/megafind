@@ -1,3 +1,6 @@
 credentials.json
 aws-credentials.json
 client_secret.json
+node_modules/
+digest.txt
+history.log
