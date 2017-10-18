@@ -1,5 +1,5 @@
 const SparkPost = require('sparkpost');
-const client = new SparkPost('d861ca2f30b721724647b2490efc77af7baa4506');
+const client = new SparkPost(process.env.SPARKPOST_API_KEY);
 const address= 'megamind@mega-find.com'
 
 //email needs to be a domain, dns must be able to be accessed by user.
